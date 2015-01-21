@@ -1,15 +1,18 @@
 package com.asif.test.sendsmsfromapptest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.SmsManager;
 import android.view.Menu;
@@ -28,27 +31,19 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		
-		if(!mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+		
+		mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		if(!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
 		{
-			Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);  
-			startActivity(gpsOptionsIntent);
+			/*Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);  
+			startActivity(gpsOptionsIntent);*/
+			displayLocationAccessDialog();
 		}
 		else
 		{
-			Toast.makeText(getApplicationContext(), "network provider enabled", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "gps provider enabled", Toast.LENGTH_LONG).show();
 		}
-		
-//		if(!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
-//		{
-//			Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);  
-//			startActivity(gpsOptionsIntent);
-//		}
-//		else
-//		{
-//			Toast.makeText(getApplicationContext(), "gps provider enabled", Toast.LENGTH_LONG).show();
-//		}
 		
 //		startLocationListeners();
 	}
@@ -65,6 +60,24 @@ public class MainActivity extends ActionBarActivity {
     }*/
 	
 	// gps and location code
+	private void displayLocationAccessDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setMessage(R.string.gps_network_not_enabled);
+        dialog.setPositiveButton(R.string.enable, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+            }
+        });
+        dialog.show();
+    }
 	
 	// onClick of the Button
 	public void sendDirectionViaSMS(View v)
