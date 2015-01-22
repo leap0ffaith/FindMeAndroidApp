@@ -7,5 +7,6 @@
     <string name="gps_network_not_enabled">We need GPS satellites enabled in Settings > Location Access.</string>
     <string name="enable">Enable</string>
     <string name="cancel">Cancel</string>
+    <string name="send_button_text">Send Direction!</string>
 
 </resources>

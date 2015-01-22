@@ -67,6 +67,16 @@ int attr listPreferredItemHeightSmall 0x7f01001d
 int attr listPreferredItemPaddingLeft 0x7f01001f
 int attr listPreferredItemPaddingRight 0x7f010020
 int attr logo 0x7f01002d
+int attr matProg_barColor 0x7f01006f
+int attr matProg_barSpinCycleTime 0x7f010073
+int attr matProg_barWidth 0x7f010076
+int attr matProg_circleRadius 0x7f010074
+int attr matProg_fillRadius 0x7f010075
+int attr matProg_linearProgress 0x7f010077
+int attr matProg_progressIndeterminate 0x7f01006e
+int attr matProg_rimColor 0x7f010070
+int attr matProg_rimWidth 0x7f010071
+int attr matProg_spinSpeed 0x7f010072
 int attr navigationMode 0x7f010027
 int attr paddingEnd 0x7f010039
 int attr paddingStart 0x7f010038
@@ -246,13 +256,15 @@ int id action_context_bar 0x7f05001d
 int id action_menu_divider 0x7f050016
 int id action_menu_presenter 0x7f050017
 int id action_mode_close_button 0x7f050024
-int id action_settings 0x7f05003d
+int id action_settings 0x7f050046
 int id activity_chooser_view_content 0x7f050025
 int id always 0x7f05000b
 int id beginning 0x7f050011
-int id button1 0x7f05003c
 int id checkbox 0x7f05002d
+int id chooseFriend 0x7f050040
 int id collapseActionView 0x7f05000d
+int id contactLinearLayout 0x7f05003f
+int id contactNameTextView 0x7f050041
 int id default_activity_button 0x7f050028
 int id dialog 0x7f05000e
 int id disableHome 0x7f050008
@@ -274,7 +286,10 @@ int id none 0x7f050010
 int id normal 0x7f050000
 int id progress_circular 0x7f050018
 int id progress_horizontal 0x7f050019
+int id progress_wheel 0x7f050043
 int id radio 0x7f05002f
+int id relativeLayout1 0x7f05003d
+int id rootRelativeLayout 0x7f05003c
 int id search_badge 0x7f050032
 int id search_bar 0x7f050031
 int id search_button 0x7f050033
@@ -285,6 +300,7 @@ int id search_mag_icon 0x7f050035
 int id search_plate 0x7f050036
 int id search_src_text 0x7f050037
 int id search_voice_btn 0x7f05003b
+int id sendButton 0x7f050045
 int id shortcut 0x7f05002e
 int id showCustom 0x7f050007
 int id showHome 0x7f050004
@@ -292,10 +308,13 @@ int id showTitle 0x7f050006
 int id split_action_bar 0x7f05001e
 int id submit_area 0x7f050039
 int id tabMode 0x7f050002
+int id textView1 0x7f05003e
 int id title 0x7f05002b
 int id top_action_bar 0x7f050020
 int id up 0x7f050021
 int id useLogo 0x7f050003
+int id waitingLinearLayout 0x7f050042
+int id waitingText 0x7f050044
 int id withText 0x7f05000c
 int integer abc_max_action_buttons 0x7f090000
 int layout abc_action_bar_decor 0x7f030000
@@ -344,6 +363,7 @@ int string cancel 0x7f0a0012
 int string enable 0x7f0a0011
 int string gps_network_not_enabled 0x7f0a0010
 int string hello_world 0x7f0a000e
+int string send_button_text 0x7f0a0013
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0b0063
@@ -567,6 +587,17 @@ int styleable MenuView_android_itemTextAppearance 1
 int styleable MenuView_android_preserveIconSpacing 7
 int styleable MenuView_android_verticalDivider 3
 int styleable MenuView_android_windowAnimationStyle 0
+int[] styleable ProgressWheel { 0x7f01006e, 0x7f01006f, 0x7f010070, 0x7f010071, 0x7f010072, 0x7f010073, 0x7f010074, 0x7f010075, 0x7f010076, 0x7f010077 }
+int styleable ProgressWheel_matProg_barColor 1
+int styleable ProgressWheel_matProg_barSpinCycleTime 5
+int styleable ProgressWheel_matProg_barWidth 8
+int styleable ProgressWheel_matProg_circleRadius 6
+int styleable ProgressWheel_matProg_fillRadius 7
+int styleable ProgressWheel_matProg_linearProgress 9
+int styleable ProgressWheel_matProg_progressIndeterminate 0
+int styleable ProgressWheel_matProg_rimColor 2
+int styleable ProgressWheel_matProg_rimWidth 3
+int styleable ProgressWheel_matProg_spinSpeed 4
 int[] styleable SearchView { 0x0101011f, 0x01010220, 0x01010264, 0x7f01005a, 0x7f01005b }
 int styleable SearchView_android_imeOptions 2
 int styleable SearchView_android_inputType 1

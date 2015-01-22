@@ -1,5 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res/com.asif.test.sendsmsfromapptest"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,18 +10,101 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.asif.test.sendsmsfromapptest.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <Button
-        android:id="@+id/button1"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="sendDirectionViaSMS"
-        android:text="Button" />
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Send directions to you!"
+            android:textColor="#7E57C2"
+            android:textSize="28dp" />
+
+        <LinearLayout
+            android:id="@+id/contactLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/chooseFriend"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:onClick="chooseFriend"
+                android:text="Select Friend" />
+
+            <TextView
+                android:id="@+id/contactNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="name-number"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/waitingLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <com.asif.test.sendsmsfromapptest.ProgressWheel
+                android:id="@+id/progress_wheel"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:gravity="center_horizontal"
+                wheel:matProg_barColor="#5588FF"
+                wheel:matProg_progressIndeterminate="true" />
+
+            <TextView
+                android:id="@+id/waitingText"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:text="Waiting for your current location..." />
+        </LinearLayout>
+
+        <!--
+             <LinearLayout
+            android:id="@+id/sendButtonLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/directionStatusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_horizontal"
+                android:text="Directions sent!"
+                android:visibility="gone" />
+        -->
+
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#81C784"
+            android:onClick="sendDirectionViaSMS"
+            android:text="@string/send_button_text"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+        <!-- </LinearLayout> -->
+
+    </RelativeLayout>
 
 </RelativeLayout>
