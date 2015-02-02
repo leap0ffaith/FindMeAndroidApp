@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.asif.test.sendsmsfromapptest.MainActivity" >
+    tools:context="com.asif.test.sendmylocation.MainActivity" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -58,7 +58,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical" >
 
-            <com.asif.test.sendsmsfromapptest.ProgressWheel
+            <com.asif.test.sendmylocation.ProgressWheel
                 android:id="@+id/progress_wheel"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -74,25 +74,6 @@
                 android:text="Waiting for your current location..." />
         </LinearLayout>
 
-        <!--
-             <LinearLayout
-            android:id="@+id/sendButtonLinearLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:visibility="gone" >
-
-            <TextView
-                android:id="@+id/directionStatusTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="center_horizontal"
-                android:text="Directions sent!"
-                android:visibility="gone" />
-        -->
-
         <Button
             android:id="@+id/sendButton"
             android:layout_width="fill_parent"
@@ -103,8 +84,6 @@
             android:text="@string/send_button_text"
             android:textColor="@android:color/white"
             android:visibility="gone" />
-        <!-- </LinearLayout> -->
-
     </RelativeLayout>
 
 </RelativeLayout>

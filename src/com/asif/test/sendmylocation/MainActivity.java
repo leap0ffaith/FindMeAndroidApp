@@ -1,8 +1,11 @@
-package com.asif.test.sendsmsfromapptest;
+package com.asif.test.sendmylocation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.asif.test.sendsmsfromapptest.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -43,25 +46,19 @@ public class MainActivity extends ActionBarActivity {
     private final int PICK_CONTACT_FOR_TEXT = 100;
     private String selectedContactName, selectedContactNumber;
     private final String primaryURIToGoogleMap = "Hi! Find me following this direction - http://maps.google.com/maps?&daddr=" ;
+    LocationListener gpsLocationListener, networkLocationListener;
+    Button sendButton;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-//		RelativeLayout rl = (RelativeLayout) findViewById(R.id.relativeLayout1);
-//		RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//		rlParams.addRule(RelativeLayout.BELOW , findViewById(R.id.textView1).getId());
-		
-		
-//		Button btn = new Button(getApplicationContext());
-//		btn.setText("asdkjfh");
-//		rl.addView(btn, rlParams);
-		
-//		ProgressWheel wheel = new ProgressWheel(getApplicationContext());
-//		wheel.setBarColor(Color.BLUE);
-//		rl.addView(wheel, rlParams);
-//		wheel.spin();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		sendButton = (Button) findViewById(R.id.sendButton);
 		
 		mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if(!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
@@ -69,11 +66,17 @@ public class MainActivity extends ActionBarActivity {
 			displayLocationAccessDialog();
 		}
 		
-		
-		
 		startLocationListeners();
 	}
 	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		removeLocationUpdates();
+	}
+	
+	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
@@ -185,7 +188,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void startLocationListeners() 
 	{
-		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+		gpsLocationListener = new LocationListener() {
 			
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -214,9 +217,9 @@ public class MainActivity extends ActionBarActivity {
 					}
 				}
 			}
-		});
+		};
 		
-		mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+		networkLocationListener = new LocationListener() {
 			
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -245,9 +248,17 @@ public class MainActivity extends ActionBarActivity {
 					}
 				}
 			}
-		});
+		};
+		
+		mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsLocationListener);
+		mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkLocationListener);
 	}
-
+	
+	private void removeLocationUpdates() {
+		mLocationManager.removeUpdates(gpsLocationListener);
+		mLocationManager.removeUpdates(networkLocationListener);
+	}
+	
 	private void checkIfAcceptableLocationAchieved()
 	{
 		boolean isGpsLocationAcceptable = false;
@@ -263,7 +274,6 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	private void changeLocationWaitingProgressBarStatus() {
-		Button sendButton = (Button) findViewById(R.id.sendButton);
 		LinearLayout waitingLinearLayout = (LinearLayout) findViewById(R.id.waitingLinearLayout);
 		waitingLinearLayout.setVisibility(ViewGroup.GONE);
 		sendButton.setVisibility(ViewGroup.VISIBLE);
@@ -279,7 +289,11 @@ public class MainActivity extends ActionBarActivity {
 	        // A new location is always better than no location
 	        return true;
 	    }
-
+	    if(location == null)
+	    {
+	    	return false;
+	    }
+	    
 	    // Check whether the new location fix is newer or older
 	    long timeDelta = location.getTime() - currentBestLocation.getTime();
 	    boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
@@ -324,29 +338,6 @@ public class MainActivity extends ActionBarActivity {
 	    return provider1.equals(provider2);
 	}
 	
-	private boolean isProviderAllowed(String s){
-        boolean flag = false;
-        for(String provider : mLocationManager.getAllProviders()){
-            if(provider.contains(s)){
-                flag = true;
-                break;
-            }
-        }
-
-        return flag;
-    }
-	
-	/*private void startLocationListeners(){
-        // Here we check for "network", "gps" in providers and start them if they are available
-        // Note that "network" is not available in the emulator
-        startLocationListener(networkLocationListener, LocationManager.NETWORK_PROVIDER);
-        startLocationListener(gpsLocationListener, LocationManager.GPS_PROVIDER);
-        mLocationManager.addGpsStatusListener(gpsStatusListener);
-
-        mRunning = true;
-
-    }*/
-	
 	// gps and location code
 	private void displayLocationAccessDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
@@ -370,11 +361,6 @@ public class MainActivity extends ActionBarActivity {
 	// onClick of the Send Button
 	public void sendDirectionViaSMS(View v)
 	{
-//		Toast.makeText(getApplicationContext(), "onClick", Toast.LENGTH_LONG).show();
-//		Button sendButton = (Button) findViewById(R.id.sendButton);
-//		sendButton.setVisibility(ViewGroup.GONE);
-//		LinearLayout waitingLinearLayout = (LinearLayout) findViewById(R.id.waitingLinearLayout);
-//		waitingLinearLayout.setVisibility(ViewGroup.VISIBLE);
 		if(selectedContactNumber.length()==0)
 		{
 			Toast.makeText(getApplicationContext(), "Please select a friend!", Toast.LENGTH_LONG).show();
@@ -385,8 +371,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		sendSMS(selectedContactNumber,smsContent);
 		changeSendButtonText("Sending...");
-		
-//		sendSMS("01847003239","hi asif");
+		disableSendButton();
 	}
 	
 	private Location selectBestLocationForSending() {
@@ -405,12 +390,9 @@ public class MainActivity extends ActionBarActivity {
 	{
 		Intent intentContact = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
 		startActivityForResult(intentContact, PICK_CONTACT_FOR_TEXT);
-//		ContactListDialogFragment dialog = new ContactListDialogFragment();
-//		dialog.show(getSupportFragmentManager(),"ContactListDialogFragment");
 	}
 	
 	private void changeSendButtonText(String text) {
-		Button sendButton = (Button) findViewById(R.id.sendButton);
 		sendButton.setText(text);
 	}
 	
@@ -435,6 +417,7 @@ public class MainActivity extends ActionBarActivity {
                     case Activity.RESULT_OK:
                         Toast.makeText(getBaseContext(), "Direction sent!",  Toast.LENGTH_SHORT).show();
                         changeSendButtonText(getString(R.string.send_button_text));
+                        enableSendButton();
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
                         Toast.makeText(getBaseContext(), "Generic failure", 
@@ -480,6 +463,14 @@ public class MainActivity extends ActionBarActivity {
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);        
     }
     
+	protected void enableSendButton() {
+		sendButton.setEnabled(true);
+	}
+
+	protected void disableSendButton() {
+		sendButton.setEnabled(false);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

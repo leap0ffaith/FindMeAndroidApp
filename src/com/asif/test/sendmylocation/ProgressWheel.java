@@ -1,4 +1,6 @@
-package com.asif.test.sendsmsfromapptest;
+package com.asif.test.sendmylocation;
+
+import com.asif.test.sendsmsfromapptest.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;
