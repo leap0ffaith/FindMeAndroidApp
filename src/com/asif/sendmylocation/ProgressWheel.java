@@ -1,6 +1,6 @@
-package com.asif.test.sendmylocation;
+package com.asif.sendmylocation;
 
-import com.asif.test.sendsmsfromapptest.R;
+import com.asif.sendmylocation.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;

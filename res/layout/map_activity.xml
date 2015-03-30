@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tap_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="tap instructions"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/next_button_selector"
+        android:onClick="goToNextActivity"
+        android:text="Next"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/start_button"
+        android:layout_below="@id/tap_text"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+</RelativeLayout>

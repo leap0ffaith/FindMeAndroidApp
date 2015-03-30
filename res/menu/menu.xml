@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menuHelp"
+        android:icon="@drawable/help_icon"
+        android:title="Help"/>
+    <item
+        android:id="@+id/menuRateUs"
+        android:icon="@drawable/rate_icon"
+        android:title="Rate This App!"/>
+    <item
+        android:id="@+id/menuShare"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Share!"/>
+    <item
+        android:id="@+id/menuContactUs"
+        android:icon="@drawable/email_icon"
+        android:title="Request feature"/>
+    <item
+        android:id="@+id/menuContactUsBug"
+        android:icon="@drawable/email_icon"
+        android:title="Report Bug"/>
+
+</menu>

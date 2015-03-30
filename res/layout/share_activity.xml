@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res/com.asif.sendmylocation"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background" >
+
+    <TextView
+        android:id="@+id/location_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="send!"
+        android:textColor="#E1EFB2"
+        android:textSize="46sp"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_selector"
+            android:onClick="onClick"
+            android:text="Send"
+            android:textColor="#ADCF44"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/sms_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_selector"
+            android:onClick="onClick"
+            android:text="@string/sms_button_text"
+            android:textColor="#ADCF44"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_selector"
+            android:onClick="onClick"
+            android:text="@string/share_button_text"
+            android:textColor="#ADCF44"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/waitingLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <com.asif.sendmylocation.ProgressWheel
+            android:id="@+id/progress_wheel"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center_horizontal"
+            wheel:matProg_barColor="#5588FF"
+            wheel:matProg_progressIndeterminate="true" />
+
+        <TextView
+            android:id="@+id/waitingText"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:text="Waiting for your current location..." />
+    </LinearLayout>
+
+</RelativeLayout>

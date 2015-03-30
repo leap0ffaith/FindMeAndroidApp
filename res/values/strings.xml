@@ -7,5 +7,16 @@
     <string name="enable">Enable</string>
     <string name="cancel">Cancel</string>
     <string name="send_button_text">Send Direction!</string>
+    <string name="intro_header">send my location!</string>
+    <string name="edit_text_enter_number">Enter your number</string>
+    <string name="phonebook">Phonebook</string>
+    <string name="info">Send your friend direction to your location! It\'s simple!</string>
+    <string name="your_location">Your Location</string>
+    <string name="use_gps">Use GPS data!</string>
+    <string name="select_from_map">Select from map!</string>
+    <string name="help_text">It\'s now very easy to send your location to your firend. \n\n Imagine the example - \n\n Your friend, Elia, is coming to meet you. You told her to come to a nice little cafe at La Rambla Street. Sadly, she cannot find the place :-( Well, nothing to worry! Just bring out your phone from your pocket, open this app and bam! She gets  a detailed google map direction to you! \n\n Have a blast!</string>
+    <string name="sms_button_text">Send Text SMS</string>
+    <string name="share_button_text">Share your location!</string>
+    <string name="share_initial_text">http://maps.google.com/maps/place/</string>
 
 </resources>
